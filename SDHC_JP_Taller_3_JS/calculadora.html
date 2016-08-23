@@ -2,46 +2,104 @@
 <html>
 
 <head>
-	<title> Us Awesome calculatoorr </title>
+	<title> Us Awesome calculatoorr </title>	
 	<meta charset="utf-8">
-  	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<script src="calc_operations.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<link href="styles.css" type="text/css" rel="stylesheet">
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="calc_operations.js"></script>
+
+	
 </head>
 <body>
-
-<h6 id="pila">Example<span class="label label-default">New</span></h6>
-<div id="calculator">
-	<div id="display-div">
- 		<input id="display" type="text" readonly="true"></input>
+<div id="calculator" class="container">
+	<form>
+		<div class="form-group">
+			<h6 id="pila" class="text-right  col-lg-12">Example</h6>		
+			<input id="display" class="form-control  col-lg-12" type="text" readonly="true" placeholder="="></input>		
+		</div>
+	</form>
+	
+	<div class="container">		
+		<div id="R1" class="row">
+				<button type="button" class="btn btn-warning col-xs-2" onclick="display()">AO1</button>
+				<button type="button" class="btn btn-warning col-xs-2" onclick="display()">AO2</button>
+				<button type="button" class="btn btn-default col-xs-2" onclick="display(7)" >7</button>
+				<button type="button" class="btn btn-default col-xs-2" onclick="display(8)">8</button>
+				<button type="button" class="btn btn-default col-xs-2" onclick="display(9)">9</button>
+				<button type="button" class="btn btn-info col-xs-2" onclick="display('/')">/</button>	
+		</div>
+		<div id="R2" class="row">
+				<button type="button" class="btn btn-warning col-xs-2" onclick="display()">AO3</button>
+				<button type="button" class="btn btn-warning col-xs-2" onclick="display()">AO4</button>
+				<button type="button" class="btn btn-default col-xs-2" onclick="display(4)" >4</button>
+				<button type="button" class="btn btn-default col-xs-2" onclick="display(5)">5</button>
+				<button type="button" class="btn btn-default col-xs-2" onclick="display(6)">6</button>
+				<button type="button" class="btn btn-info col-xs-2" onclick="display('*')">*</button>	
+		</div>
+		<div id="R3" class="row">
+				<button type="button" class="btn btn-warning col-xs-2" onclick="display()">AO5</button>
+				<button type="button" class="btn btn-warning  col-xs-2" onclick="display()">AO6</button>
+				<button type="button" class="btn btn-default  col-xs-2" onclick="display(1)" >1</button>
+				<button type="button" class="btn btn-default  col-xs-2" onclick="display(2)">2</button>
+				<button type="button" class="btn btn-default  col-xs-2" onclick="display(3)">3</button>
+				<button type="button" class="btn btn-info col-xs-2" onclick="display('-')">-</button>	
+		</div>
+		<div id="R4" class="row">
+				<button type="button" class="btn btn-warning col-xs-2" onclick="display()">AO1</button>
+				<button type="button" class="btn btn-warning col-xs-2" onclick="display()">AO2</button>
+				<button type="button" class="btn btn-default col-xs-2" onclick="display(1)" >0</button>
+				<button type="button" class="btn btn-default col-xs-2" onclick="display(2)">.</button>
+				<button type="button" class="btn btn-primary col-xs-2" onclick="display(3)">=</button>
+				<button type="button" class="btn btn-info col-xs-2" onclick="display('+')">+</button>	
+		</div>
 	</div>
+	<!--
+		<div id="operations">
+			<button type="button" onclick="operation(this)">+</button>
+			<button type="button"  onclick="operation(this)">-</button>
+			<button type="button"  onclick="operation(this)">*</button>
+			<button type="button"  onclick="operation(this)">/</button>
+			<button type="button"  onclick="display('-')">(-)</button>
+		</div>
 
-	<div id="operations">
-		<button type="button" onclick="operation(this)">+</button><button type="button"  onclick="operation(this)">-</button><button type="button"  onclick="operation(this)">*</button><button type="button"  onclick="operation(this)">/</button><button type="button"  onclick="display('-')">(-)</button>
+
+		<div id="row1">
+			<button type="button"  onclick="display(7)">7</button>
+			<button type="button"  onclick="display(8)">8</button>
+			<button type="button"  onclick="display(9)">9</button>
+			<button type="button"  onclick="operation(this)">x^2</button>
+		</div>
+
+		<div id="row2">
+			<button type="button"  onclick="display(4)">4</button>
+			<button type="button"  onclick="display(5)">5</button>
+			<button type="button" onclick="display(6)">6</button>
+			<button type="button"  onclick="display(operation)">Sqrt</button>
+		</div>
+
+
+		<div id="row3">
+			<button type="button"  onclick="display(1)">1</button>
+			<button type="button"  onclick="display(2)">2</button>
+			<button type="button"onclick="display(3)" >3</button>
+			<button type="button"  onclick="operation(this)">Pow</button>
+		</div>
+
+		<div id="row4">
+			<button type="button"  onclick="display(0)">0</button>
+			<button type="button"  onclick="display('.')">.</button>
+			<button type="button"  onclick="clear()">C</button>
+			<button type="button"  onclick="compute()">=</button>
+		</div>
+
 	</div>
-
-
-	<div id="row1">
-		<button type="button"  onclick="display(7)">7</button><button type="button"  onclick="display(8)">8</button><button type="button"  onclick="display(9)">9</button><button type="button"  onclick="operation(this)">x^2</button>
-	</div>
-
-	<div id="row2">
-		<button type="button"  onclick="display(4)">4</button><button type="button"  onclick="display(5)">5</button><button type="button" onclick="display(6)">6</button><button type="button"  onclick="display(operation)">Sqrt</button>
-	</div>
-
-
-	<div id="row3">
-		<button type="button"  onclick="display(1)">1</button><button type="button"  onclick="display(2)">2</button><button type="button"onclick="display(3)" >3</button><button type="button"  onclick="operation(this)">Pow</button>
-	</div>
-
-	<div id="row4">
-		<button type="button"  onclick="display(0)">0</button><button type="button"  onclick="display('.')">.</button><button type="button"  onclick="clear()">C</button><button type="button"  onclick="compute()">=</button>
-	</div>
+	-->
 </div>
-
 
 </body>
 </html>

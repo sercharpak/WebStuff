@@ -1,7 +1,7 @@
-#calculator{
- border-color: blue;
- border-width: 3px;
- border-style: solid;
- padding: 30px;
- width: 150px;
+
+[class*="col-"] {
+    background-clip: padding-box;
+    border: 5px solid transparent;
+    border-radius: 5px;
+    height:50px;
 }
