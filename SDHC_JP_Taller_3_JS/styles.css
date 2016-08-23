@@ -4,9 +4,11 @@
     border: 5px solid transparent;
     border-radius: 5px;
     height:50px;
+    font-size: 16px;
 }
 #pila {
 	height: 15px;
+	color: #c7c7c7;
 }
 .txtG{
 	font-size: 24px;
