@@ -2,7 +2,7 @@
 <html>
 
 <head>
-	<title> Us Awesome calculatoorr </title>	
+	<title> Us Awesome calculatoorr </title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -13,49 +13,49 @@
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script src="calc_operations.js"></script>
 
-	
+
 </head>
 <body>
 <div id="calculator" class="container">
 	<form>
 		<div class="form-group">
-			<h6 id="pila" class="text-right  col-lg-12">Example</h6>		
-			<input id="display" class="form-control  col-lg-12" type="text" readonly="true" placeholder="="></input>		
+			<h6 id="pila" class="text-right  col-xs-12">Example</h6>
+			<input id="display" class="form-control  col-xs-12" type="text" readonly="true" placeholder="="></input>
 		</div>
 	</form>
-	
-	<div class="container">		
+
+	<div class="container">
 		<div id="R1" class="row">
-				<button type="button" class="btn btn-warning col-xs-2" onclick="display()">AO1</button>
+				<button type="button" class="btn btn-danger col-xs-2" onclick="clearAll()">C</button>
 				<button type="button" class="btn btn-warning col-xs-2" onclick="display()">AO2</button>
-				<button type="button" class="btn btn-default col-xs-2" onclick="display(7)" >7</button>
-				<button type="button" class="btn btn-default col-xs-2" onclick="display(8)">8</button>
-				<button type="button" class="btn btn-default col-xs-2" onclick="display(9)">9</button>
-				<button type="button" class="btn btn-info col-xs-2" onclick="display('/')">/</button>	
+				<button type="button" class="btn btn-default col-xs-2" onclick="addCipher(7)" >7</button>
+				<button type="button" class="btn btn-default col-xs-2" onclick="addCipher(8)">8</button>
+				<button type="button" class="btn btn-default col-xs-2" onclick="addCipher(9)">9</button>
+				<button type="button" class="btn btn-info col-xs-2" onclick="addOperator('/')">/</button>
 		</div>
 		<div id="R2" class="row">
 				<button type="button" class="btn btn-warning col-xs-2" onclick="display()">AO3</button>
 				<button type="button" class="btn btn-warning col-xs-2" onclick="display()">AO4</button>
-				<button type="button" class="btn btn-default col-xs-2" onclick="display(4)" >4</button>
-				<button type="button" class="btn btn-default col-xs-2" onclick="display(5)">5</button>
-				<button type="button" class="btn btn-default col-xs-2" onclick="display(6)">6</button>
-				<button type="button" class="btn btn-info col-xs-2" onclick="display('*')">*</button>	
+				<button type="button" class="btn btn-default col-xs-2" onclick="addCipher(4)" >4</button>
+				<button type="button" class="btn btn-default col-xs-2" onclick="addCipher(5)">5</button>
+				<button type="button" class="btn btn-default col-xs-2" onclick="addCipher(6)">6</button>
+				<button type="button" class="btn btn-info col-xs-2" onclick="addOperator('*')">*</button>
 		</div>
 		<div id="R3" class="row">
 				<button type="button" class="btn btn-warning col-xs-2" onclick="display()">AO5</button>
 				<button type="button" class="btn btn-warning  col-xs-2" onclick="display()">AO6</button>
-				<button type="button" class="btn btn-default  col-xs-2" onclick="display(1)" >1</button>
-				<button type="button" class="btn btn-default  col-xs-2" onclick="display(2)">2</button>
-				<button type="button" class="btn btn-default  col-xs-2" onclick="display(3)">3</button>
-				<button type="button" class="btn btn-info col-xs-2" onclick="display('-')">-</button>	
+				<button type="button" class="btn btn-default  col-xs-2" onclick="addCipher(1)" >1</button>
+				<button type="button" class="btn btn-default  col-xs-2" onclick="addCipher(2)">2</button>
+				<button type="button" class="btn btn-default  col-xs-2" onclick="addCipher(3)">3</button>
+				<button type="button" class="btn btn-info col-xs-2" onclick="addOperator('-')">-</button>
 		</div>
 		<div id="R4" class="row">
 				<button type="button" class="btn btn-warning col-xs-2" onclick="display()">AO1</button>
 				<button type="button" class="btn btn-warning col-xs-2" onclick="display()">AO2</button>
-				<button type="button" class="btn btn-default col-xs-2" onclick="display(1)" >0</button>
-				<button type="button" class="btn btn-default col-xs-2" onclick="display(2)">.</button>
-				<button type="button" class="btn btn-primary col-xs-2" onclick="display(3)">=</button>
-				<button type="button" class="btn btn-info col-xs-2" onclick="display('+')">+</button>	
+				<button type="button" class="btn btn-default col-xs-2" onclick="addCipher(0)" >0</button>
+				<button type="button" class="btn btn-default col-xs-2" onclick="addCipher('.')">.</button>
+				<button type="button" class="btn btn-primary col-xs-2" onclick="compute()">=</button>
+				<button type="button" class="btn btn-info col-xs-2" onclick="addOperator('+')">+</button>
 		</div>
 	</div>
 	<!--
