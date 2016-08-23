@@ -1,0 +1,26 @@
+Escrito por Sergio Daniel Hernandez Charpak
+Codigo 200922618
+
+1.
+¿Que pasa si cambia la versión del protocolo a 
+HTTP/1.0?
+Esencialmente lo que sucede es que la conexion se cierra automaticamente luego de completarse la peticion.
+Con HTTP/1.1 la conexion queda abierta.
+Se pierde un poco de contenido del mensaje. Aunque para las pruebas realizadas en este contexto no fue evidente.
+La latencia deberia tambien bajar con HTTP/1.0 aunque para las pruebas en este contexto no fue evidente.
+
+2.
+¿Por qué para hacer la petición a la Universidad de los andes necesitamos poner el 
+Host en el encabezado?
+
+No logre ver por que. 
+Mi teoria es que al poner el host en el encabezado se le da la instruccion de acceder a la version de la pagina que se encuentra en el servidor uniandes.edu.co.
+En ese instante las referencias deberian ser locales y no referencias externas.
+
+3.
+¿Que pasa si no ponemos Host en el encabezado de la petición a la universidad de los 
+Andes?
+
+Quizas al no poner el Host en el encabezado de la peticion el navegador accede por otro camino al servidor. 
+En ese instante las referencias son externas y no locales.
+

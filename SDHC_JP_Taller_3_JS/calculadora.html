@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title> Awesome calculator </title>
+	<script src="calc_operations.js"></script>
+	<link href="styles.css" type="text/css" rel="stylesheet">
+	
+</head>
+<body>
+
+
+
+<div id="calculator">
+	<div id="display-div">
+ 		<input id="display" type="text" readonly="true"></input>
+	</div>
+
+	<div id="operations">
+		<button type="button" onclick="operation(this)">+</button><button type="button"  onclick="operation(this)">-</button><button type="button"  onclick="operation(this)">*</button><button type="button"  onclick="operation(this)">/</button><button type="button"  onclick="display('-')">(-)</button>
+	</div>
+
+
+	<div id="row1">
+		<button type="button"  onclick="display(7)">7</button><button type="button"  onclick="display(8)">8</button><button type="button"  onclick="display(9)">9</button><button type="button"  onclick="operation(this)">x^2</button>
+	</div>
+
+	<div id="row2">
+		<button type="button"  onclick="display(4)">4</button><button type="button"  onclick="display(5)">5</button><button type="button" onclick="display(6)">6</button><button type="button"  onclick="display(operation)">Sqrt</button>
+	</div>
+
+
+	<div id="row3">
+		<button type="button"  onclick="display(1)">1</button><button type="button"  onclick="display(2)">2</button><button type="button"onclick="display(3)" >3</button><button type="button"  onclick="operation(this)">Pow</button>
+	</div>
+
+	<div id="row4">
+		<button type="button"  onclick="display(0)">0</button><button type="button"  onclick="display('.')">.</button><button type="button"  onclick="clear()">C</button><button type="button"  onclick="compute()">=</button>
+	</div>
+</div>
+
+
+</body>
+</html>

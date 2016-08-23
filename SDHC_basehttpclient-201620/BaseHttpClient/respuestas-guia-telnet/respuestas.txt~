@@ -1,0 +1,13 @@
+1.
+¿Que pasa si cambia la versión del protocolo a 
+HTTP/1.0?
+
+
+2.
+¿Por qué para hacer la petición a la Universidad de los andes necesitamos poner el 
+Host en el encabezado?
+
+
+3.
+¿Que pasa si no ponemos Host en el encabezado de la petición a la ¿universidad de los 
+Andes?
