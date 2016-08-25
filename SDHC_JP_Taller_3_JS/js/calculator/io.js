@@ -1,6 +1,7 @@
 var Temp = "";		// Guarda el numero temporalmente
 var pila = [];		// Almacena los numeros y operaciones
 var id = [];		// Identifica cuando es numero '0' y cuando es operacion '1'
+var ERROR = "Error!";
 
 
 function display(value){
@@ -18,12 +19,13 @@ function clearPila(){
 }
 
 function Number(value){
+	if (document.getElementById("display").value===ERROR || document.getElementById("display").value==="NaN") {clearAll()}
 	display(value);
 	Temp += value;
-	console.log(Temp);
 }
 
 function Number2(value){
+	if (document.getElementById("display").value===ERROR || document.getElementById("display").value==="NaN") {clearAll()}
 	display(value);
 	if(value==="e"){
 		pila.push(e());
@@ -32,19 +34,18 @@ function Number2(value){
 		pila.push(pi());
 		id.push(0);
 	}	
-	console.log(Temp);
 }
 
 function addNumber(){
 	if(Temp!=""){
 		pila.push(parseFloat(Temp));
 		id.push(0);
-		console.log(Temp.toString());
 		Temp="";
 	}
 }
 
 function Operator(value){
+	if (document.getElementById("display").value===ERROR || document.getElementById("display").value==="NaN") {clearAll()}
 	addNumber();
 	if(value==="^2"){
 		display("^");
@@ -57,32 +58,31 @@ function Operator(value){
 		display(value);
 		pila.push(value);
 		id.push(1);
-		console.log(value);
 	}
 }
 
 function Operator2(value){
+	if (document.getElementById("display").value===ERROR || document.getElementById("display").value==="NaN") {clearAll()}
 	addNumber();
-
 	display(value);
 	pila.push(value);
 	id.push(2);
-	console.log(value);
 }
 
 function Operator3(value){
+	if (document.getElementById("display").value===ERROR || document.getElementById("display").value==="NaN") {clearAll()}
 	addNumber();
-
 	display(value);
 	pila.push(value);
 	id.push(3);
-	console.log(value);
 }
 
 function Compute(){
 	document.getElementById("pila").innerHTML = document.getElementById("display").value + ' =';
+	document.getElementById("list").innerHTML = document.getElementById("list").innerHTML + document.getElementById("display").value + '<br>';
 	addNumber();
-	// if(Verify(pila,id)){
+
+	if(Verify(pila,id)){
 		var result = Calculator(pila,id);
 
 		clearAll();
@@ -91,10 +91,10 @@ function Compute(){
 			display(result);
 		}else{
 			display(result);
-			pila.push(result);
-			id.push(0);
+			Temp = result.toString();
 		}
-	//}else{
-	//	display("Error!");
-	//}
+	}else{
+		clearAll();
+		display("Error!");
+	}
 }

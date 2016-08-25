@@ -1,13 +1,5 @@
 var ERROR = "Error!";
 
-function Verify(pila,id){
-	bool = false;
-
-
-	return bool;
-}
-
-
 function Calculator(pila,id){ 
 	/* Analizador de la pila capturada
 	   verifica el lenguaje y calcula la operación	
@@ -37,10 +29,9 @@ function Calculator(pila,id){
 
 			for(i = 0; i <id.length ; i++){
 				if(id[i] == 2){
-					if(pila[i]===")"){
-						
-						con--;
 
+					if(pila[i]===")"){						
+						con--;
 						if(con==0){
 							pf=i;
 							/* Creando los vectores para recurisividad */
@@ -69,8 +60,12 @@ function Calculator(pila,id){
 						}
 						con++;
 					}
-				}
 
+				}
+			}
+			if(con!=0){
+				result = ERROR;
+				return result;
 			}
 
 			/*OP3*/
@@ -172,4 +167,102 @@ function OP1(O,value1,value2){
 			return potencia(value1,value2);
 		break;
 	}
+}
+
+function Verify(pila,id){
+	bool = false;
+	l = id.length;
+	if( (l>1 && ( (id[0]==0 || id[0]==2) && (id[l-1] != 1) ) ) ){
+		var prev = id[0];
+		var text = pila[0];
+		for(i = 1; i<l ; i++){
+
+			switch(prev){
+				case 0:					
+					if(id[i] == 0){
+						return bool;
+					}
+					if(id[i] == 2){
+						if(!(VOP2(text,prev,pila[i],id[i]))){
+							return bool;
+						}
+					}
+				break;
+				case 1:
+					if(id[i] == 1 || id[i] == 3){
+						return bool;
+					}
+
+					if(id[i] == 2){
+						if(!(VOP2(text,prev,pila[i],id[i]))){
+							return bool;
+						}
+					}
+				break;
+				case 2:					
+					if(!(VOP2(text,prev,pila[i],id[i]))){
+						return bool;
+					}
+				break;
+				case 3:
+					if(id[i] == 0 && id[i] == 3){
+						return bool;
+					}
+					if(id[i] == 2){
+						if(!(VOP2(text,prev,pila[i],id[i]))){
+							return bool;
+						}
+					}					
+				break;
+			}			
+			prev = id[i];
+			text = pila[i];
+
+		}
+
+		bool = true;
+	}else{
+		if(id[l-1]!=1){
+			if(id[0]==0){
+				bool = true;
+			}
+		}
+	}
+	return bool;
+}
+
+function VOP2(t1,id1,t2,id2){
+	bool = false;
+	switch(id1){
+		case 0:
+			if(t2===")"){
+				bool=true;
+			}
+		break;
+		case 1:
+			if(!(t2===")")){
+				bool=true;
+			}
+		break;
+		case 2:
+			if(!(t1===")") && id2==0){
+				bool=true;
+			}
+			if(t1===")" && id2==1){
+				bool=true;
+			}
+			if(((!(t1===")")) && (!(t2===")"))) ||(t1===")" && t2===")")){
+				bool = true;
+			}
+			if(t1===")" && id2==3){
+				bool =true;
+			}
+		break;
+		case 3:
+			if(t2===")"){
+				bool=true;
+			}
+		break;
+	}
+	return bool;
 }
