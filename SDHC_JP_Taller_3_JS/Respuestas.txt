@@ -1,0 +1,23 @@
+Sergio Daniel Hernandez Charpak
+Javier Perez
+
+3. El boton quedo al final del HTML, justo antes del ::after justo antes
+del cierre del tag body.
+Sale:
+<button>UN BOTON GIGANTEZCO EN LA PAGINA DEL DEPARTAMENTO</button>
+<<pseudo:after>></<pseudo:after>>
+</body>
+
+El Boton no es visible en la pagina. 
+Probablemente porque boton no esta en ningun contenedor claro. Probablemente,
+si se especifica mejor su ubicacion el boton sea visible.
+
+4. El boton es ahora visible. Aparece en el header de la pagina, 
+de esta manera:
+Inicio	     Departamento	Pregrado	Escuela de posgrado
+UN BOTON GIGANTEZCO EN LA PAGINA DEL DEPARTAMENTO
+En ningun momento se modifica la pagina del lado del servidor. 
+Lo que se realizo correctamente en este caso es que agrego el boton al wrapper 
+del header. Probablemente, el resto de la pagina funcione con wrappers. 
+Entonces si quisieramos que el boton apareciera en otro lado de la pagina, 
+se deberia obtener el respectivo wrapper y a este agregarle el boton.
