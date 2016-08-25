@@ -13,10 +13,25 @@ function clearAll(){
 	pila = [];
 	id = [];
 }
+function clearPila(){
+	document.getElementById("pila").innerHTML = "";
+}
 
 function Number(value){
 	display(value);
 	Temp += value;
+	console.log(Temp);
+}
+
+function Number2(value){
+	display(value);
+	if(value==="e"){
+		pila.push(e());
+		id.push(0);
+	}else{
+		pila.push(pi());
+		id.push(0);
+	}	
 	console.log(Temp);
 }
 
@@ -31,11 +46,19 @@ function addNumber(){
 
 function Operator(value){
 	addNumber();
-
-	display(value);
-	pila.push(value);
-	id.push(1);
-	console.log(value);
+	if(value==="^2"){
+		display("^");
+		pila.push("^");
+		id.push(1);
+		display(2);
+		pila.push(2);
+		id.push(0);
+	}else{
+		display(value);
+		pila.push(value);
+		id.push(1);
+		console.log(value);
+	}
 }
 
 function Operator2(value){
@@ -59,15 +82,19 @@ function Operator3(value){
 function Compute(){
 	document.getElementById("pila").innerHTML = document.getElementById("display").value + ' =';
 	addNumber();
-	var result = Calculator(pila,id);
+	// if(Verify(pila,id)){
+		var result = Calculator(pila,id);
 
-	clearAll();
+		clearAll();
 
-	if(isNaN(result)){
-		display(result);
-	}else{
-		display(result);
-		pila.push(result);
-		id.push(0);
-	}
+		if(isNaN(result)){
+			display(result);
+		}else{
+			display(result);
+			pila.push(result);
+			id.push(0);
+		}
+	//}else{
+	//	display("Error!");
+	//}
 }
