@@ -2,7 +2,7 @@
 <html>
 
 <head>
-	<title> Us Awesome calculatoorr </title>
+	<title> Us Awesome calculator </title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -11,51 +11,61 @@
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<script src="calc_operations.js"></script>
-
+	<script src="io.js"></script>
+	<script src="calculator.js"></script>
+	<script src="operations.js"></script>
 
 </head>
 <body>
 <div id="calculator" class="container">
 	<form>
 		<div class="form-group">
-			<h6 id="pila" class="text-right  col-xs-12">Example</h6>
-			<input id="display" class="form-control text-right txtG col-xs-12" type="text" readonly="true" placeholder="="></input>
+			<h6 id="pila" class="text-right col-xs-12"></h6>
+			<input id="display" class="form-control text-right txtG col-xs-12" type="text" readonly="true" placeholder=""></input>
 		</div>
 	</form>
 
 	<div class="container">
+		<div id="R0" class="row">
+				<button type="button" class="btn btn-default col-xs-2" onclick=""></button>		
+				<button type="button" class="btn btn-default col-xs-2" onclick=""></button>			
+				<button type="button" class="btn btn-warning col-xs-2" onclick="Operator2('(')">(</button>
+				<button type="button" class="btn btn-warning col-xs-2" onclick="Operator2(')')">)</button>
+				<button type="button" class="btn btn-default col-xs-2" onclick=""></button>
+				<button type="button" class="btn btn-danger col-xs-2" onclick="clearAll()">AC</button>
+		</div>
 		<div id="R1" class="row">
-				<button type="button" class="btn btn-danger col-xs-2" onclick="clearAll()">C</button>
-				<button type="button" class="btn btn-warning col-xs-2" onclick="display()">x<sup>y</sup></button>
-				<button type="button" class="btn btn-default col-xs-2" onclick="addCipher(7)" >7</button>
-				<button type="button" class="btn btn-default col-xs-2" onclick="addCipher(8)">8</button>
-				<button type="button" class="btn btn-default col-xs-2" onclick="addCipher(9)">9</button>
-				<button type="button" class="btn btn-info txtG col-xs-2" onclick="addOperator('/')">&divide;</button>
+				<button type="button" class="btn btn-warning col-xs-2" onclick="Operator('^2')">x<sup>2</sup></button>
+				<button type="button" class="btn btn-warning col-xs-2" onclick="Operator2('sqrt(')">&radic;</button>
+				<button type="button" class="btn btn-default col-xs-2" onclick="Number(7)" >7</button>
+				<button type="button" class="btn btn-default col-xs-2" onclick="Number(8)">8</button>
+				<button type="button" class="btn btn-default col-xs-2" onclick="Number(9)">9</button>
+				<button type="button" class="btn btn-info txtG col-xs-2" onclick="Operator('/')">&divide;</button>
 		</div>
 		<div id="R2" class="row">
-				<button type="button" class="btn btn-warning col-xs-2" onclick="display()">x<sup>2</sup></button>
-				<button type="button" class="btn btn-warning col-xs-2" onclick="display()">&radic;</button>
-				<button type="button" class="btn btn-default col-xs-2" onclick="addCipher(4)" >4</button>
-				<button type="button" class="btn btn-default col-xs-2" onclick="addCipher(5)">5</button>
-				<button type="button" class="btn btn-default col-xs-2" onclick="addCipher(6)">6</button>
-				<button type="button" class="btn btn-info txtG col-xs-2" onclick="addOperator('*')">&times;</button>
+				<button type="button" class="btn btn-warning col-xs-2" onclick="Operator('^')">x<sup>y</sup></button>
+				<button type="button" class="btn btn-warning col-xs-2" onclick="Operator3('!')">x!</button>
+				<button type="button" class="btn btn-default col-xs-2" onclick="Number(4)" >4</button>
+				<button type="button" class="btn btn-default col-xs-2" onclick="Number(5)">5</button>
+				<button type="button" class="btn btn-default col-xs-2" onclick="Number(6)">6</button>
+				<button type="button" class="btn btn-info txtG col-xs-2" onclick="Operator('*')">&times;</button>
 		</div>
 		<div id="R3" class="row">
-				<button type="button" class="btn btn-warning col-xs-2" onclick="display()">AO5</button>
-				<button type="button" class="btn btn-warning  col-xs-2" onclick="display()">AO6</button>
-				<button type="button" class="btn btn-default  col-xs-2" onclick="addCipher(1)" >1</button>
-				<button type="button" class="btn btn-default  col-xs-2" onclick="addCipher(2)">2</button>
-				<button type="button" class="btn btn-default  col-xs-2" onclick="addCipher(3)">3</button>
-				<button type="button" class="btn btn-info txtG col-xs-2" onclick="addOperator('-')">&minus;</button>
+				<button type="button" class="btn btn-warning col-xs-2" onclick="Operator2('sin(')">sin</button>
+				<button type="button" class="btn btn-warning  col-xs-2" onclick="Operator2('cos(')">cos</button>
+				<button type="button" class="btn btn-default  col-xs-2" onclick="Number(1)" >1</button>
+				<button type="button" class="btn btn-default  col-xs-2" onclick="Number(2)">2</button>
+				<button type="button" class="btn btn-default  col-xs-2" onclick="Number(3)">3</button>
+				<button type="button" class="btn btn-info txtG col-xs-2" onclick="Operator('-')">&minus;</button>
 		</div>
 		<div id="R4" class="row">
-				<button type="button" class="btn btn-warning col-xs-2" onclick="display()">AO7</button>
-				<button type="button" class="btn btn-warning col-xs-2" onclick="display()">AO8</button>
-				<button type="button" class="btn btn-default col-xs-2" onclick="addCipher(0)" >0</button>
-				<button type="button" class="btn btn-default col-xs-2" onclick="addCipher('.')">.</button>
-				<button type="button" class="btn btn-primary txtG col-xs-2" onclick="compute()">=</button>
-				<button type="button" class="btn btn-info txtG col-xs-2" onclick="addOperator('+')">&plus;</button>
+				<button type="button" class="btn btn-warning col-xs-2" onclick="Operator2('tan(')">tan</button>
+				<button type="button" class="btn btn-warning col-xs-1" onclick="Number2(&pi;)">&pi;</button>
+				<button type="button" class="btn btn-warning col-xs-1" onclick="Number2('e')">e</button>
+				<button type="button" class="btn btn-default col-xs-2" onclick="Number(0)" >0</button>
+				<button type="button" class="btn btn-default col-xs-2" onclick="Number('.')">.</button>
+				<button type="button" class="btn btn-primary txtG col-xs-2" onclick="Compute()">=</button>
+				<button type="button" class="btn btn-info txtG col-xs-2" onclick="Operator('+')">&plus;</button>
 		</div>
 	</div>
 </div>
