@@ -18,31 +18,31 @@ import javax.websocket.server.ServerEndpoint;
 
 /**
  *
- * @author nb
+ * @author Sergio Hernandez (basado en el tutorial)
  */
 @ServerEndpoint(value = "/whiteboardendpoint",
         encoders = {FigureEncoder.class},
         decoders = {FigureDecoder.class})
 public class MyWhiteboard {
 
-    private static Set<Session> peers = Collections.synchronizedSet(new HashSet<Session>());
+    private static Set<Session> users = Collections.synchronizedSet(new HashSet<Session>());
 
     @OnOpen
-    public void onOpen(Session peer) {
-        peers.add(peer);
+    public void onOpen(Session user) {
+        users.add(user);
     }
     
     @OnClose
-    public void onClose(Session peer) {
-        peers.remove(peer);
+    public void onClose(Session user) {
+        users.remove(user);
     }
 
     @OnMessage
     public void broadcastFigure(Figure figure, Session session) throws IOException, EncodeException {
         System.out.println("broadcastFigure: " + figure);
-        for (Session peer : peers) {
-            if (!peer.equals(session)) {
-                peer.getBasicRemote().sendObject(figure);
+        for (Session user : users) {
+            if (!user.equals(session)) {
+                user.getBasicRemote().sendObject(figure);
             }
         }
     }
@@ -50,9 +50,9 @@ public class MyWhiteboard {
     @OnMessage
     public void broadcastSnapshot(ByteBuffer data, Session session) throws IOException {
         System.out.println("broadcastBinary: " + data);
-        for (Session peer : peers) {
-            if (!peer.equals(session)) {
-                peer.getBasicRemote().sendBinary(data);
+        for (Session user : users) {
+            if (!user.equals(session)) {
+                user.getBasicRemote().sendBinary(data);
             }
         }
     }

@@ -7,6 +7,16 @@ var canvas = document.getElementById("myCanvas");
 var context = canvas.getContext("2d");
 canvas.addEventListener("click", defineImage, false);
 
+function guardar(){
+    var arr = document.createElement('a');
+    var dt = canvas.toDataURL();
+    arr.href=dt;
+    arr.download="AwesomeCanvas.png";
+    console.log("Deberia estar a punto de descargar todo");
+    arr.click();
+}
+//document.getElementById('myenlacedescargar').addEventListener('click', guardar, false);
+
 function getCurrentPos(evt) {
     var rect = canvas.getBoundingClientRect();
     return {

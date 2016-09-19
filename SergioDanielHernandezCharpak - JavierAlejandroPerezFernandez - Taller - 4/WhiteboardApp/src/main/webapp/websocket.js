@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-var wsUri = "ws://" + document.location.host + document.location.pathname + "whiteboardendpoint";
+var wsUri = "ws://" + document.location.host + "/WhiteBoardApp/whiteboardendpoint";
 var websocket = new WebSocket(wsUri);
 websocket.binaryType = "arraybuffer";
 

@@ -7,17 +7,23 @@ package org.sample.whiteboardapp;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Usuario
+ * @author Sergio Hernandez
  */
-public class LoginServlet extends HttpServlet {
+@WebServlet(name= "loginServlet", urlPatterns= {"/loginServlet"})
+public class LoggedInServlet extends HttpServlet {
 
+    //Coleccion de todos los usuarios en sesion ahora mismo
+    public ArrayList usuarios = new ArrayList();    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -29,19 +35,23 @@ public class LoginServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet LoginServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet LoginServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        
+        //Primero, captura al usuario
+        String username = request.getParameter("username");
+        
+        //Lo agrega a la coleccion
+        if(!usuarios.contains(username)){
+        usuarios.add(username);
+        //Lo agrega a la sesion
+        HttpSession session= request.getSession();
+        session.setAttribute("name", username);
         }
+        
+        //Hora de ir al whiteboard
+        request.setAttribute("name", username);
+        request.setAttribute("names", usuarios.toString());
+        request.getRequestDispatcher("/whiteboard.jsp").forward(request, response);
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

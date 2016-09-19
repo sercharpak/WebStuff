@@ -1,10 +1,19 @@
+<%-- 
+    Document   : whiteboard
+    Created on : 18/09/2016, 09:14:32 PM
+    Author     : Sergio Hernandez
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Start Page</title>
+        <title>Welcome dear awesome ${name})</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
     <body>
+        <h1>Welcome dear awesome ${name}</h1>
+        <form action="logoutServlet"><button>Salir del Whiteboard</button></form>
         <h1>Collaborative Whiteboard</h1>
 
         <table>
@@ -46,8 +55,14 @@
                 </td>
             </tr>
         </table>
-
-        <script type="text/javascript" src="websocket.js"></script>
+        <h3>Usuarios Sincronizando todo esto en este instante:</h3>
+        <label>${names}</label>
+        <h3>Descargas</h3>
+        <button onclick="guardar()"> Descargar como png </button>
+        <%-- 
+        <a id="myenlacedescargar" download="AwesomeCanvas.jpg">Descargar como jpg</a>
+        --%>
         <script type="text/javascript" src="whiteboard.js"></script>
+        <script type="text/javascript" src="websocket.js"></script>
     </body>
 </html>
