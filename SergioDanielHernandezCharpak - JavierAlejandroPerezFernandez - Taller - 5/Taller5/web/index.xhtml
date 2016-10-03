@@ -4,17 +4,19 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://xmlns.jcp.org/jsf/html">
     <h:head>
-        <title>Facelet Title</title>
+        <title>Taller 5</title>
     </h:head>
     <h:body>
-        Hello from Facelets
+        <h2>Welcome to the Taller 5</h2>
         
         <h:form>
-    	   <h:inputText id="name" value="#{helloBean.name}"></h:inputText>
-    	   <h:commandButton value="Welcome Me">
+    	   <h:inputText id="name" value="#{coreBean.name}"></h:inputText>
+    	   <h:commandButton value="Ajax!">
     		 <f:ajax execute="name" render="output" />
     	   </h:commandButton>
         </h:form>
+        
+        <p><h:outputText id="output" value="#{coreBean.lists}" /></p>
 
     </h:body>
 </html>
