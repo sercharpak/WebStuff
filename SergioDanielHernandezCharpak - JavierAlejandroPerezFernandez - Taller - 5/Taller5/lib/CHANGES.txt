@@ -1,0 +1,35 @@
+0.1 to 0.2
+-------------
+
+* Core JavaBeans are now Serializable
+
+* Fixed up bugs in tests due to data changes in MB service
+
+* Amended BeanPopulator.getAlbum(Resource) to include boolean flag
+   indicating whether the tracks should be fetch from the model. This is 
+   a simple optimisation to avoid fetching more data than required from 
+   model.
+   
+* Amended BeanPopulator.getTrack(Resource, Resource) to call
+   getAlbum and thereby populate the basic album metadata (but not 
+   tracks)
+
+* Added com.ldodds.amazon.Amazon class, and Asin property
+
+* Added get/setAmazonId to Album, and support in BeanPopulator to fetch the 
+   literal asin from the model and populate it
+   
+* Added CHANGES.txt to keep track of progress   
+
+* Added RecordCollectionRDFGenerator as a sample command-line application 
+   that uses the API. It reads a list of albums from an input file, queries the API
+   (assuming first match is always correct) and then constructs a new RDF document
+   with the retrieved metadata. Needs work though.
+   
+* Added mm:country, mm:releaseDateList, mm:ReleaseDate to MM
+
+* Added ReleaseDate class   
+   
+   
+   
+     
