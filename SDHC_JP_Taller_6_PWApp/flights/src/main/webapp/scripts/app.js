@@ -16,12 +16,12 @@
    * Event listeners for UI elements
    *
    ****************************************************************************/
-
+/*
   document.getElementById('butRefresh').addEventListener('click', function() {
     // Refresh all of the forecasts
     app.updateForecasts();
   });
-
+*/
 
   /*****************************************************************************
    *
@@ -112,11 +112,11 @@
        */
       caches.match(url).then(function(response) {
         if (response) {
-          response.json().then(function updateFromCache(json) {
-            var results = json.query.results;
-            results.key = key;
-            results.created = json.query.created;
-            app.updateForecastCard(results);
+        var json = response.json();
+        json.then(function updateFromCache(json) {
+        	  
+            json.created = new Date();
+            app.updateForecastCard(json);
           });
         }
       });
