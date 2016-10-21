@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="canonical" href="https://weather-pwa-sample.firebaseapp.com/final/">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Weather PWA</title>
+  <title>Flights PWA</title>
   <link rel="stylesheet" type="text/css" href="styles/style.css">
 
   <!-- TODO add manifest here -->
@@ -26,39 +26,26 @@
   </header>
 
   <main class="main">
-    <div class="card cardTemplate weather-forecast" hidden>
+    <div class="card cardTemplate flight-forecast" hidden>
       <div class="city-key" hidden></div>
       <div class="card-last-updated" hidden></div>
-      <div class="location"></div>
+      <div class="name"></div>
       <div class="date"></div>
-      <div class="description"></div>
       <div class="current">
         <div class="visual">
           <div class="icon"></div>
-          <div class="temperature">
-            <span class="value"></span><span class="scale">°F</span>
-          </div>
-        </div>
-        <div class="description">
-          <div class="humidity"></div>
-          <div class="wind">
+          <div class="state">
             <span class="value"></span>
-            <span class="scale">mph</span>
-            <span class="direction"></span>°
           </div>
-          <div class="sunrise"></div>
-          <div class="sunset"></div>
-        </div>
+        </div>       
       </div>      
     </div>
   </main>
-
   <div class="loader">
     <svg viewBox="0 0 32 32" width="32" height="32">
       <circle id="spinner" cx="16" cy="16" r="14" fill="none"></circle>
     </svg>
   </div>
-
   <!-- Uncomment the line below when ready to test with fake data -->
   <script src="scripts/app.js" async></script>
 

@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Flight{
     
     private static final long serialVersionUID = 1L;
-    private long id;
+    private long key;
     private String name;
     private Date hour;
     private String state;
@@ -17,19 +17,19 @@ public class Flight{
     	
     }
     
-    public Flight(long id, String name, Date hour, String state){
-    	this.id = id;
+    public Flight(long key, String name, Date hour, String state){
+    	this.key = key;
     	this.name = name;
     	this.hour = hour;
     	this.state = state;
     }
 
-	public long getId() {
-		return id;
+	public long getKey() {
+		return key;
 	}
 
-	public void setId(long id) {
-		this.id = id;
+	public void setKey(long key) {
+		this.key = key;
 	}
 
 	public String getName() {

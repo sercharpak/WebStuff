@@ -21,10 +21,10 @@ public class FlightResource {
 	}	
 	
     @GET
-    @Path("/{flightid}")
+    @Path("/{flightkey}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Flight getFlight(@PathParam("flightid") int flightid) {
-        return flighservice.getFlight(flightid);
+    public Flight getFlight(@PathParam("flightkey") int flightkey) {
+        return flighservice.getFlight(flightkey);
     }
     
 }

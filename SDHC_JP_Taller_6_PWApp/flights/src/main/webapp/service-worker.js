@@ -4,8 +4,7 @@ var filesToCache = [
   '/flights',
   '/flights/index.html',
   '/flights/scripts/app.js',
-  '/flights/styles/style.css',
-  '/flights/images/icons'
+  '/flights/styles/style.css'
 ];
 
 self.addEventListener('install', function(e) {

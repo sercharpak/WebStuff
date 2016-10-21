@@ -4,12 +4,10 @@
   var app = {
     isLoading: true,
     visibleCards: {},
-    selectedCities: [],
+    selectedFlights: [],
     spinner: document.querySelector('.loader'),
     cardTemplate: document.querySelector('.cardTemplate'),
     container: document.querySelector('.main'),
-    addDialog: document.querySelector('.dialog-container'),
-    daysOfWeek: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
   };
 
 
@@ -35,17 +33,14 @@
   // doesn't already exist, it's cloned from the template.
   app.updateForecastCard = function(data) {
     var dataLastUpdated = new Date(data.created);
-    var sunrise = data.channel.astronomy.sunrise;
-    var sunset = data.channel.astronomy.sunset;
-    var current = data.channel.item.condition;
-    var humidity = data.channel.atmosphere.humidity;
-    var wind = data.channel.wind;
-
+    var hour = new Date(data.hour);
+    var state = data.state;
+    
     var card = app.visibleCards[data.key];
     if (!card) {
       card = app.cardTemplate.cloneNode(true);
       card.classList.remove('cardTemplate');
-      card.querySelector('.location').textContent = data.label;
+      card.querySelector('.name').textContent = data.name;
       card.removeAttribute('hidden');
       app.container.appendChild(card);
       app.visibleCards[data.key] = card;
@@ -65,34 +60,10 @@
     }
     cardLastUpdatedElem.textContent = data.created;
 
-    card.querySelector('.description').textContent = current.text;
-    card.querySelector('.date').textContent = current.date;
-    card.querySelector('.current .icon').classList.add(app.getIconClass(current.code));
-    card.querySelector('.current .temperature .value').textContent =
-      Math.round(current.temp);
-    card.querySelector('.current .sunrise').textContent = sunrise;
-    card.querySelector('.current .sunset').textContent = sunset;
-    card.querySelector('.current .humidity').textContent =
-      Math.round(humidity) + '%';
-    card.querySelector('.current .wind .value').textContent =
-      Math.round(wind.speed);
-    card.querySelector('.current .wind .direction').textContent = wind.direction;
-    var nextDays = card.querySelectorAll('.future .oneday');
-    var today = new Date();
-    today = today.getDay();
-    for (var i = 0; i < 7; i++) {
-      var nextDay = nextDays[i];
-      var daily = data.channel.item.forecast[i];
-      if (daily && nextDay) {
-        nextDay.querySelector('.date').textContent =
-          app.daysOfWeek[(i + today) % 7];
-        nextDay.querySelector('.icon').classList.add(app.getIconClass(daily.code));
-        nextDay.querySelector('.temp-high .value').textContent =
-          Math.round(daily.high);
-        nextDay.querySelector('.temp-low .value').textContent =
-          Math.round(daily.low);
-      }
-    }
+    card.querySelector('.date').textContent = hour;
+    card.querySelector('.state .value').textContent = state;
+    card.querySelector('.value').classList.add(app.getStateClass(state));
+    
     if (app.isLoading) {
       app.spinner.setAttribute('hidden', true);
       app.container.removeAttribute('hidden');
@@ -100,7 +71,21 @@
     }
   };
 
-
+  app.getStateClass = function(state) {
+	    switch (state) {	      
+	      case "ON TIME":
+	    	  return 'ontime';
+	      case "DELAYED":
+	    	  return 'delayed';
+	      case "TO LAND":
+	    	  return 'toland';
+	      case "TO BOARD":
+	    	  return 'toboard';
+	      case "TO TAKE OFF":
+	    	  return 'totakeoff';	     
+	    }
+	  };
+	  
   /*****************************************************************************
    *
    * Methods for dealing with the model
@@ -115,10 +100,9 @@
    * request goes through, then the card gets updated a second time with the
    * freshest data.
    */
-  app.getForecast = function(key, label) {
-    var statement = 'select * from weather.forecast where woeid=' + key;
-    var url = 'https://query.yahooapis.com/v1/public/yql?format=json&q=' +
-        statement;
+  app.getForecast = function(key) {
+    var url = 'http://localhost:8080/flights/webapi/flights/' + key;
+    console.log(url);
     // TODO add cache logic here
     if ('caches' in window) {
       /*
@@ -131,7 +115,6 @@
           response.json().then(function updateFromCache(json) {
             var results = json.query.results;
             results.key = key;
-            results.label = label;
             results.created = json.query.created;
             app.updateForecastCard(results);
           });
@@ -144,15 +127,13 @@
       if (request.readyState === XMLHttpRequest.DONE) {
         if (request.status === 200) {
           var response = JSON.parse(request.response);
-          var results = response.query.results;
-          results.key = key;
-          results.label = label;
-          results.created = response.query.created;
-          app.updateForecastCard(results);
+          console.log(response);
+          response.created = new Date();
+          app.updateForecastCard(response);
         }
       } else {
         // Return the initial weather forecast since no data is available.
-        app.updateForecastCard(initialWeatherForecast);
+        app.updateForecastCard(initialFlightForecast);
       }
     };
     request.open('GET', url);
@@ -167,11 +148,11 @@
     });
   };
 
-  // TODO add saveSelectedCities function here
+  // TODO add saveselectedFlights function here
   // Save list of cities to localStorage.
-  app.saveSelectedCities = function() {
-    var selectedCities = JSON.stringify(app.selectedCities);
-    localStorage.selectedCities = selectedCities;
+  app.saveselectedFlights = function() {
+    var selectedFlights = JSON.stringify(app.selectedFlights);
+    localStorage.selectedFlights = selectedFlights;
   };
 
   /*
@@ -179,10 +160,11 @@
    * or when the user has not saved any cities. See startup code for more
    * discussion.
    */
-  var initialWeatherForecast = {
-    id: '1',
-    name: 'BOG to NY',
-    hour: '2016-07-22T01:00:00Z',
+  var initialFlightForecast = {
+    key: '0',
+    name: 'AV 8892 : Bogotá to New York',
+    created: '2016-10-20T23:32:46.997-05:00',
+    hour: '2016-10-20T23:32:46.997-05:00',
     state: 'ON TIME',
   };
   // TODO uncomment line below to test app with fake data
@@ -200,11 +182,11 @@
    ************************************************************************/
 
   // TODO add startup code here
-  app.selectedCities = localStorage.selectedCities;
-  if (app.selectedCities) {
-    app.selectedCities = JSON.parse(app.selectedCities);
-    app.selectedCities.forEach(function(city) {
-      app.getForecast(city.key, city.label);
+  app.selectedFlights = localStorage.selectedFlights;
+  if (app.selectedFlights) {
+    app.selectedFlights = JSON.parse(app.selectedFlights);
+    app.selectedFlights.forEach(function(flight) {
+      app.getForecast(flight.key);
     });
   } else {
     /* The user is using the app for the first time, or the user has not
@@ -212,11 +194,15 @@
      * scenario could guess the user's location via IP lookup and then inject
      * that data into the page.
      */
-    app.updateForecastCard(initialWeatherForecast);
-    app.selectedCities = [
-      {key: initialWeatherForecast.key, label: initialWeatherForecast.label}
-    ];
-    app.saveSelectedCities();
+	var f;
+	for(f = 1; f <=5 ; f++){
+		if (!app.selectedFlights) {
+		  app.selectedFlights = [];
+		}
+		app.getForecast(f);
+		app.selectedFlights.push({key: f});
+		app.saveselectedFlights();
+  	}    
   }
 
   // TODO add service worker code here
