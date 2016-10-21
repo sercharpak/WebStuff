@@ -14,3 +14,6 @@ Herramientas usadas e incluidas dentro del proyecto:
 
 	**El entorno de desarrollo utilizado para desarrollar la aplicación 
 	  fue: Eclipse Jee Neon.1
+	  
+	***Para desplegar la PWApp se recomienda el navegador:
+	   Google Chrome 49 o superior.  
