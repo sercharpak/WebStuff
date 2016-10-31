@@ -15,10 +15,10 @@ Herramientas usadas e incluidas dentro del proyecto:
 	HTML, CSS, JavaScript 	-> UI
 
 	*La aplicacion está para desplegar en cualquier servidor
-	 el que se utilizó para el desarrollo fue GlassFish 4.4.1 o WildFly 8.x
+	 el que se utilizó para el desarrollo fue WildFly 8.x
 
 	**El entorno de desarrollo utilizado para desarrollar la aplicación 
-	  fue: Eclipse Jee Neon.1
+	  fue: Eclipse JEE Neon.1
 	  
 	***Para desplegar la PWApp se recomienda el navegador:
 	   Google Chrome 49 o superior.  
