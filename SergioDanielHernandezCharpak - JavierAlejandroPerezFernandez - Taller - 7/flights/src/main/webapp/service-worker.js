@@ -3,8 +3,13 @@ var cacheName = 'flightsPWA-final-1';
 var filesToCache = [
   '/flights',
   '/flights/index.html',
+  '/flights/offline.html',
   '/flights/scripts/app.js',
-  '/flights/styles/style.css'
+  '/flights/styles/style.css',
+  '/flights/images/av.png',
+  '/flights/images/dt.png',
+  '/flights/images/lan.png',
+  '/flights/images/vc.png'
 ];
 
 self.addEventListener('install', function(e) {
@@ -47,8 +52,39 @@ self.addEventListener('fetch', function(e) {
   } else {
     e.respondWith(
       caches.match(e.request).then(function(response) {
-        return response || fetch(e.request);
+    	  if(response || fetch(e.request)){
+    		  return response || fetch(e.request);
+    	  }else{
+    		  return caches.match('offline.html');
+    	  }
+        
       })
     );
   }
+  
+  if(e.request.url.endsWith('.png')){
+	  e.respondWith(
+	      caches.match(e.request).then(
+	    	  function(response){
+	    		  if(response == undefined){
+	    			  console.log('Not in cache: '+e.request.url);
+	    			  return fetch(e.request).then(
+	    				function(response2){
+	    					if(response2.status == 404){
+	    						return caches.match('offline.html');
+	    					}else{
+	    						return response2;
+	    					}
+	    				}	  
+	    			  );
+	    		  }else{
+	    			  console.log("From cache.. "+e.request.url);
+	    			  return response;
+	    			  
+	    		  }
+	    	  }	  
+	      )			  
+	  );
+  }
+  
 });

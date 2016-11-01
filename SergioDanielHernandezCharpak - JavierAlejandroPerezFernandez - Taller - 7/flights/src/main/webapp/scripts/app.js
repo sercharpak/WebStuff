@@ -35,6 +35,7 @@
     var dataLastUpdated = new Date(data.created);
     var hour = new Date(data.hour);
     var state = data.state;
+    var ae = data.ae;
     
     var card = app.visibleCards[data.key];
     if (!card) {
@@ -59,7 +60,7 @@
       }
     }
     cardLastUpdatedElem.textContent = data.created;
-
+    card.querySelector('.image .ae').classList.add(app.getAeClass(ae));
     card.querySelector('.date').textContent = hour;
     card.querySelector('.state .value').textContent = state;
     card.querySelector('.value').classList.add(app.getStateClass(state));
@@ -85,7 +86,19 @@
 	    	  return 'totakeoff';	     
 	    }
 	  };
-	  
+  app.getAeClass = function(ae) {
+	    switch (ae) {	      
+	      case "AV":
+	    	  console.log("[IMAGEN] AVIANCA");
+	    	  return 'av';
+	      case "DT":
+	    	  return 'dt';
+	      case "FC":
+	    	  return 'fc';
+	      case "LA":
+	    	  return 'la';	     
+	    }
+	  };
   /*****************************************************************************
    *
    * Methods for dealing with the model
@@ -162,7 +175,8 @@
    */
   var initialFlightForecast = {
     key: '0',
-    name: 'AV 8892 : Bogotá to New York',
+    ae: 'AV',
+    name: '8892 : Bogotá to New York',
     created: '2016-10-20T23:32:46.997-05:00',
     hour: '2016-10-20T23:32:46.997-05:00',
     state: 'ON TIME',

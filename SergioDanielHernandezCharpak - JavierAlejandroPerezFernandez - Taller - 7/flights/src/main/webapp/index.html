@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Flights PWA</title>
   <link rel="stylesheet" type="text/css" href="styles/style.css">
-
+  
   <!-- TODO add manifest here -->
   <link rel="manifest" href="/manifest.json">
   <!-- Add to home screen for Safari on iOS -->
@@ -29,16 +29,23 @@
     <div class="card cardTemplate flight-forecast" hidden>
       <div class="city-key" hidden></div>
       <div class="card-last-updated" hidden></div>
-      <div class="name"></div>
-      <div class="date"></div>
-      <div class="current">
-        <div class="visual">
-          <div class="icon"></div>
-          <div class="state">
-            <span class="value"></span>
-          </div>
-        </div>       
-      </div>      
+      <div class="flight">
+	      <div class="image">
+	      	  <div class="ae"></div>
+	      </div>
+	      <div class="description">
+	      	  <div class="name"></div>
+		      <div class="date"></div>
+		      <div class="current">
+		        <div class="visual">
+		          <div class="state">
+		            <span class="value"></span>
+		          </div>
+		        </div>       
+		      </div>
+	      </div>
+      </div>
+            
     </div>
   </main>
   <div class="loader">

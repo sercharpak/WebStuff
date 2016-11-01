@@ -12,16 +12,19 @@ public class Flight{
     private String name;
     private Date hour;
     private String state;
+    private String ae;
     
     public Flight(){
     	
     }
     
-    public Flight(long key, String name, Date hour, String state){
+    public Flight(long key, String ae, String name, Date hour, String state){
     	this.key = key;
+    	this.ae = ae;
     	this.name = name;
     	this.hour = hour;
     	this.state = state;
+    	
     }
 
 	public long getKey() {
@@ -58,6 +61,14 @@ public class Flight{
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public String getAe() {
+		return ae;
+	}
+
+	public void setAe(String ae) {
+		this.ae = ae;
 	}
     
     
