@@ -1,0 +1,4 @@
+Profesor Mario la presente nota es para mostrarle que no pudimos continuar con el taller 7 
+porque no se pudo resolver el problema que se presenta con la IndexedDB, intentamos crear los index en la base de datos
+y no se crean no entendemos cual es la razon. Mientras que en el ejemplo si funciona perfectamente, adjuntamos las capturas
+de pantalla para evidenciar el error.
