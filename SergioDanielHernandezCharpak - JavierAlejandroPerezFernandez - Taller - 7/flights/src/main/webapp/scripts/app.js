@@ -25,7 +25,8 @@
 	    };
 	    request.onupgradeneeded = function(event) {
 	      console.log("[IDB-UPGRADE]");
-	      var objectStore = event.currentTarget.result.createObjectStore(DB_STORE_NAME,{keyPath: 'id', autoincrement: true});
+	      var objectStore = event.currentTarget.result.createObjectStore(
+	    		  DB_STORE_NAME,{keyPath: 'id', autoincrement: true});
 	      
 	      objectStore.createIndex('a','a',{unique: true});
 	      objectStore.createIndex('b','b',{unique: false});
