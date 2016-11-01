@@ -1,6 +1,62 @@
 (function() {
   'use strict';
+  
+  
+  /************ DATABASE ************************/
+  
+  const DB_NAME = 'indexeddb-flights';
+  const DB_VERSION = 1; // Use a long long for this value (don't use a float)
+  const DB_STORE_NAME = 'flights';
+  
+  var db;
+  var current_view_pub_key;
+  
+  function openDB(){
+	  if(!window.indexedDB){
+	    window.alert("Your browser doesn't support a stable database.")
+	  } else {
+	    var request = window.indexedDB.open(DB_NAME, DB_VERSION);
+	    request.onerror = function(event){
+	      window.alert("Error connection to IndexedDB.")
+	    };
+	    request.onsuccess = function(event){      
+	      db = this.result;
+	      console.log("Welcome to IndexedDB.")
+	    };
+	    request.onupgradeneeded = function(event) {
+	      console.log("[IDB-UPGRADE]");
+	      var objectStore = event.currentTarget.result.createObjectStore(DB_STORE_NAME,{keyPath: 'id', autoincrement: true});
+	      
+	      objectStore.createIndex('a','a',{unique: true});
+	      objectStore.createIndex('b','b',{unique: false});
+	      objectStore.createIndex('c','c',{unique: false});      
+	    };
+	  }
+  }
+  
+  function getObjectStore(store_name, mode) {
+    var tx = db.transaction(store_name, mode);
+    return tx.objectStore(store_name);
+  }
 
+  function clearObjectStore(store_name) {
+    var store = getObjectStore(DB_STORE_NAME, 'readwrite');
+    var req = store.clear();
+    req.onsuccess = function(evt) {
+      displayActionSuccess("Store cleared");
+      displayPubList(store);
+    };
+    req.onerror = function (evt) {
+      console.error("clearObjectStore:", evt.target.errorCode);
+      displayActionFailure(this.error);
+    };
+  }
+
+  openDB();
+  
+  
+  
+  /************** APLICATION *********************/
   var app = {
     isLoading: true,
     visibleCards: {},
@@ -32,6 +88,8 @@
   // Updates a weather card with the latest weather forecast. If the card
   // doesn't already exist, it's cloned from the template.
   app.updateForecastCard = function(data) {
+	  
+	  
     var dataLastUpdated = new Date(data.created);
     var hour = new Date(data.hour);
     var state = data.state;
@@ -88,8 +146,7 @@
 	  };
   app.getAeClass = function(ae) {
 	    switch (ae) {	      
-	      case "AV":
-	    	  console.log("[IMAGEN] AVIANCA");
+	      case "AV":	    	  
 	    	  return 'av';
 	      case "DT":
 	    	  return 'dt';
@@ -126,6 +183,7 @@
       caches.match(url).then(function(response) {
         if (response) {
         var json = response.json();
+        console.log("[DATA]"+json);
         json.then(function updateFromCache(json) {
         	  
             json.created = new Date();
