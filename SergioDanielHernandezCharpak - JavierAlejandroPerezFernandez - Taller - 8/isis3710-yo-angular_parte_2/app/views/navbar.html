@@ -1,0 +1,10 @@
+<p>This is the navbar view.</p>
+<div ng-controller="NavbarCtrl">
+<h2 ng-show="usuario==false">Tutorial Angulaar </h2>
+<h2 ng-show="usuario==true">Bienvenido a la plataforma</h2>
+<form class="navbar-form navbar-right">
+<button ng-hide="usuario == true" type="submit" ng-click="iniciarSesion()" class="btn btn-default"> Iniciar Sesion </button>
+<link ng-show="usuario==true"> Mi cuenta</link>
+<button ng-show="usuario == true" type ="submit" ng-click="cerrarSesion()" class="btn btn-default"> Cerrar Sesion </button>
+</form>
+</div>
